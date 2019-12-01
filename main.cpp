@@ -143,7 +143,7 @@ class Scoreboard
 
     //?? NOT SURE HOW TO SET THIS UP TO AUTO UPDATE
     //BASED ON CURRENT VOTE COUNT......
-    bool setleadStatus() 
+    /*bool setleadStatus() 
     {
       if(c1.getcurrentVotes() > c2.getcurrentVotes())
       {
@@ -153,7 +153,7 @@ class Scoreboard
       {
         return ("LOSING");
       }
-    }
+    }*/
 
     //****************Candidate Menus****************
     
