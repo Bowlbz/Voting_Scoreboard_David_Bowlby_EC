@@ -62,8 +62,6 @@ class Scoreboard
       c1.setpartyAff(" ");
       c1.setcurrentVotes(0);
       
-
-
       c2.setfirstName(" ");
       c2.setlastName(" ");
       c2.setpartyAff(" ");
@@ -115,7 +113,7 @@ class Scoreboard
     {
       string newpartyAff = "";
       cout << "\nWhat is your New Party Affliation: " << endl;
-      cin >> newpartyAff;
+      getline(cin, newpartyAff);
       c1.setpartyAff(newpartyAff);
     }
 
@@ -123,7 +121,7 @@ class Scoreboard
     {
       string newpartyAff = "";
       cout << "\nWhat is your New Party Affliation: " << endl;
-      cin >> newpartyAff;
+      getline(cin, newpartyAff);
       c2.setpartyAff(newpartyAff); 
     }
 
@@ -143,14 +141,19 @@ class Scoreboard
       c2.setcurrentVotes(newVotes);
     }
 
-    /*bool setleadStatus() 
+    //?? NOT SURE HOW TO SET THIS UP TO AUTO UPDATE
+    //BASED ON CURRENT VOTE COUNT......
+    bool setleadStatus() 
     {
-      
       if(c1.getcurrentVotes() > c2.getcurrentVotes())
       {
-         
+        return ("WINNING");
       }
-    }*/
+      else
+      {
+        return ("LOSING");
+      }
+    }
 
     //****************Candidate Menus****************
     
@@ -179,6 +182,9 @@ class Scoreboard
         {
           setcurrentVotes();
         }
+
+        //Clear Screen Refresh
+        cout << "\033[2J\033[1;1H";
       }
 
       void menuCandidate2()//Candidate 2 Menu
@@ -206,6 +212,9 @@ class Scoreboard
         {
           setcurrentVotes2();
         }
+
+        //Clear Screen Refresh
+        cout << "\033[2J\033[1;1H";
       }
       void displayInfo()
       {
@@ -214,6 +223,7 @@ class Scoreboard
         cout<< "\nLast Name: " << c1.getlastName() << endl;
         cout<< "\nParty Affiliate: " << c1.getpartyAff() << endl;
         cout<< "\nTotal Votes: " << c1.getcurrentVotes() << endl;
+        cout << "\nStatus: " << c1.getleadStatus() << endl;
          
       }
 
@@ -224,15 +234,15 @@ class Scoreboard
         cout<< "\nLast Name: " << c2.getlastName() << endl;
         cout<< "\nParty Affiliate: " << c2.getpartyAff() << endl;
         cout<< "\nTotal Votes: " << c2.getcurrentVotes() << endl;
+        cout << "\nStatus: " << c2.getleadStatus() << endl;
       }
       
 
       void updateMenu()
       {
         int selection = 3;
-        do
-        {
-          int selection = 0;
+        
+          
           cout << "\nWhich Candidate would you like to UPDATE: " << endl;
           cout << "\n1.) Candidate 1" << endl;
           cout << "2.) Candiate 2" << endl;
@@ -250,10 +260,8 @@ class Scoreboard
           {
             cout << "\nHave a Nice Day!!!!" << endl;
           }
-        }while (selection != 3);
+        
       }
-
-      
 
       void displayBoard()
       {
@@ -266,33 +274,21 @@ class Scoreboard
 
 };
 
-
-  
-
-
-
-
-
 int main()
 {
   Scoreboard s;
   int selection = 0;
   
-    do
-    {
-      s.displayBoard();
-      s.displayInfo();
-      s.displayInfo2();
-      s.updateMenu();
-      //cout << "\033[2J\033[1;1H";
+  do 
+  {
+    s.displayBoard();
+    s.displayInfo();
+    s.displayInfo2();
+    s.updateMenu();
+  
+  }while (selection != 3);
+        
     
-    }while() // Complete tonight!!!!!
   
- 
- 
-
-
-  
-   
-    return 0;
+  return 0;
 }
