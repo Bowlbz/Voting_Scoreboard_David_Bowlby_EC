@@ -42,7 +42,7 @@ class Candidate
       string getpartyAff () const { return partyAff;}
 
       void setleadStatus (bool lS);
-      bool getleadStatus () const { return leadStatus;}
+      bool getleadStatus() const { return leadStatus;}
 
       void setcurrentVotes (int cV) { currentVotes = cV;}
       int getcurrentVotes () const { return currentVotes;}
@@ -143,17 +143,41 @@ class Scoreboard
 
     //?? NOT SURE HOW TO SET THIS UP TO AUTO UPDATE
     //BASED ON CURRENT VOTE COUNT......
-    /*bool setleadStatus() 
+    string printLeadStatus() 
     {
+       string status(""); 
       if(c1.getcurrentVotes() > c2.getcurrentVotes())
       {
-        return ("WINNING");
+        status = "C1 is Winning"; 
+        return status;
+      }
+      else if(c1.getcurrentVotes() < c2.getcurrentVotes())
+      {
+        status = "C2 is Winning"; 
+        return status;
       }
       else
       {
-        return ("LOSING");
+        status = "Tied!!!"; 
+        return status;
       }
-    }*/
+    }
+
+    void setName(int who)
+    {
+      string newName = ""; 
+        if(who == 1)
+        {
+          cin >> newName; 
+          c1.setlastName(newName); 
+        }
+        else if(who == 2)
+        {
+          cin >> newName; 
+          c2.setlastName(newName); 
+        }
+
+    }
 
     //****************Candidate Menus****************
     
@@ -218,15 +242,24 @@ class Scoreboard
       }
       void displayInfo()
       {
+        cout << "\n\tStatus: " << printLeadStatus() << endl;
+
         cout << "*********Candidate 1**********" << endl;
         cout<< "\nFirst Name: " << c1.getfirstName() << endl;
         cout<< "\nLast Name: " << c1.getlastName() << endl;
         cout<< "\nParty Affiliate: " << c1.getpartyAff() << endl;
         cout<< "\nTotal Votes: " << c1.getcurrentVotes() << endl;
-        cout << "\nStatus: " << c1.getleadStatus() << endl;
-         
+        //cout << "\nStatus: " << c1.getleadStatus() << endl;
+        
+         cout << "**********Candidate 2**********" << endl;
+        cout<< "\nFirst Name: " << c2.getfirstName() << endl;
+        cout<< "\nLast Name: " << c2.getlastName() << endl;
+        cout<< "\nParty Affiliate: " << c2.getpartyAff() << endl;
+        cout<< "\nTotal Votes: " << c2.getcurrentVotes() << endl;
+        //cout << "\nStatus: " << c2.getleadStatus() << endl;
+        
       }
-
+     /*
       void displayInfo2()
       {
         cout << "**********Candidate 2**********" << endl;
@@ -234,8 +267,9 @@ class Scoreboard
         cout<< "\nLast Name: " << c2.getlastName() << endl;
         cout<< "\nParty Affiliate: " << c2.getpartyAff() << endl;
         cout<< "\nTotal Votes: " << c2.getcurrentVotes() << endl;
-        cout << "\nStatus: " << c2.getleadStatus() << endl;
-      }
+        //cout << "\nStatus: " << c2.getleadStatus() << endl;
+        cout << "\nStatus: " << printLeadStatus() << endl;
+      }*/
       
 
       void updateMenu()
@@ -274,16 +308,50 @@ class Scoreboard
 
 };
 
+//external function working on the pass by reference data
+void setNameExternal(Scoreboard &s, int who)
+{
+        string newName = ""; 
+        if(who == 1)
+        {
+          cin >> newName; 
+          s.getc1().setlastName(newName); 
+        }
+        else if(who == 2)
+        {
+          cin >> newName; 
+          s.getc2().setlastName(newName); 
+        }
+
+}
+
+/*external function working on the pass by reference data
+void setNameExternalPointer(Scoreboard *s, int who)
+{
+        string newName = ""; 
+        if(who == 1)
+        {
+          cin >> newName; 
+          s->getc1()->setlastName(newName); 
+        }
+        else if(who == 2)
+        {
+          cin >> newName; 
+          s->getc2()->setlastName(newName); 
+        }
+
+}*/
 int main()
 {
   Scoreboard s;
   int selection = 0;
+  //cout << s.getc2().getleadStatus() << endl; 
   
   do 
   {
     s.displayBoard();
     s.displayInfo();
-    s.displayInfo2();
+  //  s.displayInfo2();
     s.updateMenu();
   
   }while (selection != 3);
